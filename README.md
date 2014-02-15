@@ -62,7 +62,7 @@ Example:
 ```
 
 
-# Usage - As a library
+# Usage - As a service
 
 Inject the 'smoothScroll' service in your directive / factory / controller / whatever, and call like this:
 

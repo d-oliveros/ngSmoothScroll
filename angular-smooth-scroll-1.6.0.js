@@ -1,7 +1,7 @@
 /* =============================================================
 /*
 /*	 Angular Smooth Scroll 1.6.0
-/*	 Animate scrolling to a provided element, by David Oliveros.
+/*	 Animates scrolling to elements, by David Oliveros.
 /*
 /*
 /*	 Easing support contributed by Willem Liu.
@@ -16,25 +16,31 @@
 /*	 Influenced by Chris Ferdinandi
 /*	 https://github.com/cferdinandi
 /*
+/*
 /*	 Free to use under the MIT License.
 /*
-/* * ============================================================= */
+/* ============================================================= */
 
 angular.module('smoothScroll', [])
 
 
 // Scrolls the window to this element, optionally validating an expression
 //
-.directive('smoothScroll', ['smoothScroll', function(smoothScroll){
+.directive('smoothScroll', ['$timeout', 'smoothScroll', function($timeout, smoothScroll){
 	return {
 		restrict: 'A',
-		scope: {
-			doScroll: '@scrollIf',
-		},
 		link: function($scope, $elem, $attrs){
-			if ( typeof $scope.doScroll === 'undefined' || $scope.doScroll === 'true' ){
-				smoothScroll($elem[0], $attrs);
-			}
+			$timeout(function(){
+
+				if ( typeof $attrs.scrollIf === 'undefined' || $attrs.scrollIf === 'true' ){
+					smoothScroll($elem[0], {
+						duration: $attrs.duration,
+						offset: $attrs.offset,
+						easing: $attrs.easing,
+					});
+				}
+
+			});
 		}
 	};
 }])
@@ -53,10 +59,15 @@ angular.module('smoothScroll', [])
 				
 				if ( targetElement ) {
 					e.preventDefault();
-					smoothScroll(targetElement, $attrs);
+					
+					smoothScroll(targetElement, {
+						duration: $attrs.duration,
+						offset: $attrs.offset,
+						easing: $attrs.easing,
+					});
+
 					return false;
 				}
-			
 			});
 		}
 	};
@@ -65,31 +76,26 @@ angular.module('smoothScroll', [])
 
 // Smooth scrolls the window to the provided element.
 //
-.service('smoothScroll', ['$timeout', function($timeout){
-	var smoothScroll, startLocation, timeLapsed, 
-		percentage, duration, offset, easing, 
-		easingPattern, getEndLocation, stopAnimation, 
-		percentage, position, animateScroll, runAnimation;
+.factory('smoothScroll', ['$timeout', function($timeout){
 
-	// Run the smooth scroll animation
-	//
-	smoothScroll = function (element, options) {
+	var smoothScroll = function (element, options) {
 		$timeout(function(){
-			startLocation = window.pageYOffset;
-			timeLapsed = 0;
+			var startLocation = window.pageYOffset,
+				timeLapsed = 0,
+				percentage, position;
 
 
 			// Options
 			//
 			options = options || {};
-			duration = options.duration || 800;
-			options.offset || 0;
-			easing = options.easing || 'easeInOutQuart';
+			var duration = options.duration || 800,
+				offset = options.offset || 0,
+				easing = options.easing || 'easeInOutQuart';
 			
 
 			// Calculate the easing pattern
 			//
-			easingPattern = function (type, time) {
+			var easingPattern = function (type, time) {
 				if ( type == 'easeInQuad' ) return time * time; // accelerating from zero velocity
 				if ( type == 'easeOutQuad' ) return time * (2 - time); // decelerating to zero velocity
 				if ( type == 'easeInOutQuad' ) return time < 0.5 ? 2 * time * time : -1 + (4 - 2 * time) * time; // acceleration until halfway, then deceleration
@@ -108,8 +114,8 @@ angular.module('smoothScroll', [])
 
 			// Calculate how far to scroll
 			//
-			getEndLocation = function (element) {
-				location = 0;
+			var getEndLocation = function (element) {
+				var location = 0;
 				if (element.offsetParent) {
 					do {
 						location += element.offsetTop;
@@ -119,14 +125,14 @@ angular.module('smoothScroll', [])
 				location = Math.max(location - offset, 0);
 				return location;
 			};
-			endLocation = getEndLocation(element);
-			distance = endLocation - startLocation;
+			var endLocation = getEndLocation(element);
+			var distance = endLocation - startLocation;
 
 
-			// Stop the scrolling animation
+			// Stop the scrolling animation when the anchor is reached (or at the top/bottom of the page)
 			//
-			stopAnimation = function () {
-				currentLocation = window.pageYOffset;
+			var stopAnimation = function () {
+				var currentLocation = window.pageYOffset;
 				if ( position == endLocation || currentLocation == endLocation || ( (window.innerHeight + currentLocation) >= document.body.scrollHeight ) ) {
 					clearInterval(runAnimation);
 				}
@@ -135,7 +141,7 @@ angular.module('smoothScroll', [])
 
 			// Scroll the page by an increment, and check if it's time to stop
 			//
-			animateScroll = function () {
+			var animateScroll = function () {
 				timeLapsed += 16;
 				percentage = ( timeLapsed / duration );
 				percentage = ( percentage > 1 ) ? 1 : percentage;
@@ -147,7 +153,7 @@ angular.module('smoothScroll', [])
 
 			// Init
 			//
-			runAnimation = setInterval(animateScroll, 16);
+			var runAnimation = setInterval(animateScroll, 16);
 		});
 	};
 
