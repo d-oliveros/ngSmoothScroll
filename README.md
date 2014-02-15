@@ -20,7 +20,7 @@ as a dependency
 
 # Usage - As a directive
 
-This module provides three directives:
+This module provides two directives:
 
 ####smoothScroll:
 
