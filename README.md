@@ -1,7 +1,7 @@
 Angular smooth scroll
 ==============
 
-A pure-javascript library and set of directives to scroll smoothly to an element with easing. 
+A pure-javascript library and set of directives to scroll smoothly to an element with easing. Easing support contributed by Willem Liu with code from Gaëtan Renaudeau.
 
 No jQuery required.
 
