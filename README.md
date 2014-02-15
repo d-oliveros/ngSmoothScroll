@@ -1,7 +1,9 @@
-Angular Smooth Scroll
+Angular smooth scroll
 ==============
 
-A pure-javascript library and set of directives to scroll smoothly to an element with easing. No jQuery required.
+A pure-javascript library and set of directives to scroll smoothly to an element with easing. 
+
+No jQuery required.
 
 # Features
 
@@ -27,23 +29,19 @@ Attribute. Scrolls the window to this element, optionally validating the express
 Example:
 ```js
 
-// Basic
-//
-<div smooth-scroll></div> // The window will scroll to this element's position when compiling this directive
+// Basic - The window will scroll to this element's position when compiling this directive
+<div smooth-scroll></div>
 
 
 // With options
-//
 <div smooth-scroll duration="800" easing="easeInQuint" offset="120">{{...}}</div>
 
 
 // With condition
-//
 <div smooth-scroll scroll-if="{{ myExpression }}">{{...}}</div>
 
 
 // Inside ng-repeat
-//
 <div smooth-scroll scroll-if="{{ $last }}" duration="2500">{{...}}</div>
 ```
 
@@ -56,28 +54,11 @@ Example:
 ```js
 
 // Basic
-//
 <a href="#" scroll-to="my-element-3">Click me!</a>
 
 
 // With options
-//
 <button scroll-to="elem-id5" duration="1800">Scroll to next page.</button>
-
-
-// With options
-//
-<div smooth-scroll duration="800" easing="easeInQuint" offset="120">{{...}}</div>
-
-
-// With condition
-//
-<div smooth-scroll scroll-if="{{ myExpression }}">{{...}}</div>
-
-
-// Inside ng-repeat
-//
-<div smooth-scroll scroll-if="{{ $last }}" duration="2500">{{...}}</div>
 ```
 
 
@@ -88,13 +69,11 @@ Inject the 'smoothScroll' service in your directive / factory / controller / wha
 ```js
 
 // Using defaults
-//
 var element = document.getElementById('my-elem');
 smoothScroll(element);
 
 
 // With options
-//
 var element = $elem[0];
 
 var options = {
@@ -107,7 +86,6 @@ smoothScroll(element, options);
 
 
 // In directive's link function
-//
 link: function($scope, $elem, $attrs){
 	var options = $attrs;
 
