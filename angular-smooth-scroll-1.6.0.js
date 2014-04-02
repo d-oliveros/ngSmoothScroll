@@ -78,9 +78,13 @@ angular.module('smoothScroll', [])
 //
 .factory('smoothScroll', ['$timeout', function($timeout){
 
+	var getScrollLocation = function() {
+		return window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop;
+	};
+
 	var smoothScroll = function (element, options) {
 		$timeout(function(){
-			var startLocation = window.pageYOffset,
+			var startLocation = getScrollLocation(),
 				timeLapsed = 0,
 				percentage, position;
 
@@ -132,7 +136,7 @@ angular.module('smoothScroll', [])
 			// Stop the scrolling animation when the anchor is reached (or at the top/bottom of the page)
 			//
 			var stopAnimation = function () {
-				var currentLocation = window.pageYOffset;
+				var currentLocation = getScrollLocation();
 				if ( position == endLocation || currentLocation == endLocation || ( (window.innerHeight + currentLocation) >= document.body.scrollHeight ) ) {
 					clearInterval(runAnimation);
 				}
