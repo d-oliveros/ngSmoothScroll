@@ -34,7 +34,7 @@ Example:
 
 
 // With options
-<div smooth-scroll duration="800" easing="easeInQuint" offset="120">{{...}}</div>
+<div smooth-scroll duration="800" easing="easeInQuint" offset="120" callback-before="aFunction(element)" callback-after="anotherFunction">{{...}}</div>
 
 
 // With condition
@@ -58,7 +58,7 @@ Example:
 
 
 // With options
-<button scroll-to="elem-id5" duration="1800">Scroll to next page.</button>
+<button scroll-to="elem-id5" duration="1800" callback-before="aFunction(element)" callback-after="anotherFunction">Scroll to next page.</button>
 ```
 
 
@@ -79,7 +79,13 @@ var element = $elem[0];
 var options = {
 	duration: 700,
 	easing: 'easeInQuad',
-	offset: 120
+	offset: 120,
+	callbackBefore: function(element) {
+		console.log('about to scroll to element', element);
+	},
+	callbackAfter: function(element) {
+		console.log('scrolled to element', element);
+	}
 }
 
 smoothScroll(element, options);
@@ -110,10 +116,24 @@ Default: `0`
 The offset from the top of the page in which the scroll should stop.
 
 #### easing
-Type: `String`
-Default: `easeInOutQuart`
+type: `string`
+default: `easeinoutquart`
 
-The easing function to be used for this scroll.
+the easing function to be used for this scroll.
+
+#### callbackBefore
+type: `function`
+default: `function(element) {}`
+
+a callback function to run before the scroll has started. It is passed the
+element that will be scrolled to.
+
+#### callbackAfter
+type: `function`
+default: `function(element) {}`
+
+a callback function to run after the scroll has completed. It is passed the
+element that was scrolled to.
 
 ### Easing functions
 

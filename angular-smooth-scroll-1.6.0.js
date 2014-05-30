@@ -29,14 +29,35 @@ angular.module('smoothScroll', [])
 .directive('smoothScroll', ['$timeout', 'smoothScroll', function($timeout, smoothScroll){
 	return {
 		restrict: 'A',
+		scope: {
+			callbackBefore: '&',
+			callbackAfter: '&',
+		},
 		link: function($scope, $elem, $attrs){
 			$timeout(function(){
-
 				if ( typeof $attrs.scrollIf === 'undefined' || $attrs.scrollIf === 'true' ){
+					var callbackBefore = function(element) {
+						if ( $attrs.callbackBefore ) {
+							var exprHandler = $scope.callbackBefore({element: element});
+							if (typeof exprHandler === 'function') {
+								exprHandler(element);
+							}
+						}
+					}
+					var callbackAfter = function(element) {
+						if ( $attrs.callbackAfter ) {
+							var exprHandler = $scope.callbackAfter({element: element});
+							if (typeof exprHandler === 'function') {
+								exprHandler(element);
+							}
+						}
+					}
 					smoothScroll($elem[0], {
 						duration: $attrs.duration,
 						offset: $attrs.offset,
 						easing: $attrs.easing,
+						callbackBefore: callbackBefore,
+						callbackAfter: callbackAfter,
 					});
 				}
 
@@ -51,6 +72,10 @@ angular.module('smoothScroll', [])
 .directive('scrollTo', ['smoothScroll', function(smoothScroll){
 	return {
 		restrict: 'A',
+		scope: {
+			callbackBefore: '&',
+			callbackAfter: '&',
+		},
 		link: function($scope, $elem, $attrs){
 			var targetElement;
 			
@@ -60,10 +85,29 @@ angular.module('smoothScroll', [])
 				if ( targetElement ) {
 					e.preventDefault();
 					
+					var callbackBefore = function(element) {
+						if ( $attrs.callbackBefore ) {
+							var exprHandler = $scope.callbackBefore({element: element});
+							if (typeof exprHandler === 'function') {
+								exprHandler(element);
+							}
+						}
+					}
+					var callbackAfter = function(element) {
+						if ( $attrs.callbackAfter ) {
+							var exprHandler = $scope.callbackAfter({element: element});
+							if (typeof exprHandler === 'function') {
+								exprHandler(element);
+							}
+						}
+					}
+
 					smoothScroll(targetElement, {
 						duration: $attrs.duration,
 						offset: $attrs.offset,
 						easing: $attrs.easing,
+						callbackBefore: callbackBefore,
+						callbackAfter: callbackAfter,
 					});
 
 					return false;
@@ -94,7 +138,9 @@ angular.module('smoothScroll', [])
 			options = options || {};
 			var duration = options.duration || 800,
 				offset = options.offset || 0,
-				easing = options.easing || 'easeInOutQuart';
+				easing = options.easing || 'easeInOutQuart',
+				callbackBefore = options.callbackBefore || function() {},
+				callbackAfter = options.callbackAfter || function() {};
 			
 
 			// Calculate the easing pattern
@@ -139,6 +185,7 @@ angular.module('smoothScroll', [])
 				var currentLocation = getScrollLocation();
 				if ( position == endLocation || currentLocation == endLocation || ( (window.innerHeight + currentLocation) >= document.body.scrollHeight ) ) {
 					clearInterval(runAnimation);
+					callbackAfter(element);
 				}
 			};
 
@@ -157,6 +204,7 @@ angular.module('smoothScroll', [])
 
 			// Init
 			//
+			callbackBefore(element);
 			var runAnimation = setInterval(animateScroll, 16);
 		});
 	};
