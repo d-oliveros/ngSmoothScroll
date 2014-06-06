@@ -36,7 +36,7 @@ angular.module('smoothScroll', [])
 					smoothScroll($elem[0], {
 						duration: $attrs.duration,
 						offset: $attrs.offset,
-						easing: $attrs.easing,
+						easing: $attrs.easing
 					});
 				}
 
@@ -63,7 +63,7 @@ angular.module('smoothScroll', [])
 					smoothScroll(targetElement, {
 						duration: $attrs.duration,
 						offset: $attrs.offset,
-						easing: $attrs.easing,
+						easing: $attrs.easing
 					});
 
 					return false;
