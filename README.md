@@ -18,6 +18,14 @@ Include the .js file in your page then enable usage of the directive by includin
 as a dependency
 
 
+# Bower
+
+Install with bower with:
+
+```bash
+bower install ngSmoothScroll
+```
+
 # Usage - As a directive
 
 This module provides two directives:
@@ -27,7 +35,7 @@ This module provides two directives:
 Attribute. Scrolls the window to this element, optionally validating the expression inside scroll-if.
 
 Example:
-```js
+```html
 
 // Basic - The window will scroll to this element's position when compiling this directive
 <div smooth-scroll></div>
@@ -51,7 +59,7 @@ Example:
 Attribute. Scrolls the window to the specified element ID when clicking this element.
 
 Example:
-```js
+```html
 
 // Basic
 <a href="#" scroll-to="my-element-3">Click me!</a>
