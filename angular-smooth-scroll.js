@@ -1,6 +1,6 @@
 /* =============================================================
 /*
-/*	 Angular Smooth Scroll 1.6.1
+/*	 Angular Smooth Scroll 1.7.0
 /*	 Animates scrolling to elements, by David Oliveros.
 /*
 /*   Callback hooks contributed by Ben Armston
