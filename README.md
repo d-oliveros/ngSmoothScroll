@@ -161,6 +161,9 @@ The available easing functions are:
 
 #### Credits
 
+Callback hooks contributed by Ben Armston.
+https://github.com/benarmston
+
 Easing support contributed by Willem Liu.
 https://github.com/willemliu
 
