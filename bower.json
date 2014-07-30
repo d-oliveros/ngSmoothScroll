@@ -1,0 +1,26 @@
+{
+  "name": "angular-smooth-scroll",
+  "version": "1.6.0",
+  "homepage": "https://github.com/d-oliveros/angular-smooth-scroll",
+  "authors": [
+    "David Oliveros <dato.oliveros@gmail.com>"
+  ],
+  "description": "A pure-javascript library and set of directives to scroll smoothly to an element with easing.",
+  "main": "angular-smooth-scroll-1.6.0.js",
+  "dependencies": {
+    "angular": "^1.2.0"
+  },
+  "keywords": [
+    "angularjs",
+    "smooth",
+    "scroll"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
