@@ -1,8 +1,10 @@
 /* =============================================================
 /*
-/*	 Angular Smooth Scroll 1.6.0
+/*	 Angular Smooth Scroll 1.6.1
 /*	 Animates scrolling to elements, by David Oliveros.
 /*
+/*   Callback hooks contributed by Ben Armston
+/*   https://github.com/benarmston
 /*
 /*	 Easing support contributed by Willem Liu.
 /*	 https://github.com/willemliu
@@ -57,7 +59,7 @@ angular.module('smoothScroll', [])
 						offset: $attrs.offset,
 						easing: $attrs.easing,
 						callbackBefore: callbackBefore,
-						callbackAfter: callbackAfter,
+						callbackAfter: callbackAfter
 					});
 				}
 
@@ -107,7 +109,7 @@ angular.module('smoothScroll', [])
 						offset: $attrs.offset,
 						easing: $attrs.easing,
 						callbackBefore: callbackBefore,
-						callbackAfter: callbackAfter,
+						callbackAfter: callbackAfter
 					});
 
 					return false;
