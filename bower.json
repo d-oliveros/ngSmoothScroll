@@ -6,7 +6,7 @@
     "David Oliveros <dato.oliveros@gmail.com>"
   ],
   "description": "A pure-javascript library and set of directives to scroll smoothly to an element with easing.",
-  "main": "angular-smooth-scroll-1.6.0.js",
+  "main": "angular-smooth-scroll.js",
   "dependencies": {
     "angular": "^1.2.0"
   },
