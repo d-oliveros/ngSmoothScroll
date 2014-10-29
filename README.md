@@ -119,13 +119,13 @@ The duration of the smooth scroll, in miliseconds.
 
 #### offset
 Type: `Integer`
-Default: `0`
+Default: `800`
 
 The offset from the top of the page in which the scroll should stop.
 
 #### easing
 type: `string`
-default: `easeinoutquart`
+default: `easeInOutQuad`
 
 the easing function to be used for this scroll.
 
