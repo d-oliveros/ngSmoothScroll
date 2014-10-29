@@ -125,7 +125,7 @@ The offset from the top of the page in which the scroll should stop.
 
 #### easing
 type: `string`
-default: `easeInOutQuad`
+default: `easeInOutQuart`
 
 the easing function to be used for this scroll.
 
