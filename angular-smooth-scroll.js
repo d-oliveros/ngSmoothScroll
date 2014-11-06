@@ -1,6 +1,6 @@
 /* =============================================================
 /*
-/*	 Angular Smooth Scroll 1.7.0
+/*	 Angular Smooth Scroll 1.7.1
 /*	 Animates scrolling to elements, by David Oliveros.
 /*
 /*   Callback hooks contributed by Ben Armston
@@ -23,130 +23,34 @@
 /*
 /* ============================================================= */
 
-angular.module('smoothScroll', [])
+(function () {
+	'use strict';
+
+	var module = angular.module('smoothScroll', []);
 
 
-// Scrolls the window to this element, optionally validating an expression
-//
-.directive('smoothScroll', ['$timeout', 'smoothScroll', function($timeout, smoothScroll){
-	return {
-		restrict: 'A',
-		scope: {
-			callbackBefore: '&',
-			callbackAfter: '&',
-		},
-		link: function($scope, $elem, $attrs){
-			$timeout(function(){
-				if ( typeof $attrs.scrollIf === 'undefined' || $attrs.scrollIf === 'true' ){
-					var callbackBefore = function(element) {
-						if ( $attrs.callbackBefore ) {
-							var exprHandler = $scope.callbackBefore({element: element});
-							if (typeof exprHandler === 'function') {
-								exprHandler(element);
-							}
-						}
-					}
-					var callbackAfter = function(element) {
-						if ( $attrs.callbackAfter ) {
-							var exprHandler = $scope.callbackAfter({element: element});
-							if (typeof exprHandler === 'function') {
-								exprHandler(element);
-							}
-						}
-					}
-					smoothScroll($elem[0], {
-						duration: $attrs.duration,
-						offset: $attrs.offset,
-						easing: $attrs.easing,
-						callbackBefore: callbackBefore,
-						callbackAfter: callbackAfter
-					});
-				}
-
-			});
-		}
-	};
-}])
-
-
-// Scrolls to a specified element ID when this element is clicked
-//
-.directive('scrollTo', ['smoothScroll', function(smoothScroll){
-	return {
-		restrict: 'A',
-		scope: {
-			callbackBefore: '&',
-			callbackAfter: '&',
-		},
-		link: function($scope, $elem, $attrs){
-			var targetElement;
-			
-			$elem.on('click', function(e){
-				targetElement = document.getElementById($attrs.scrollTo);
-				
-				if ( targetElement ) {
-					e.preventDefault();
-					
-					var callbackBefore = function(element) {
-						if ( $attrs.callbackBefore ) {
-							var exprHandler = $scope.callbackBefore({element: element});
-							if (typeof exprHandler === 'function') {
-								exprHandler(element);
-							}
-						}
-					}
-					var callbackAfter = function(element) {
-						if ( $attrs.callbackAfter ) {
-							var exprHandler = $scope.callbackAfter({element: element});
-							if (typeof exprHandler === 'function') {
-								exprHandler(element);
-							}
-						}
-					}
-
-					smoothScroll(targetElement, {
-						duration: $attrs.duration,
-						offset: $attrs.offset,
-						easing: $attrs.easing,
-						callbackBefore: callbackBefore,
-						callbackAfter: callbackAfter
-					});
-
-					return false;
-				}
-			});
-		}
-	};
-}])
-
-
-// Smooth scrolls the window to the provided element.
-//
-.factory('smoothScroll', ['$timeout', function($timeout){
-
-	var getScrollLocation = function() {
-		return window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop;
-	};
-
+	// Smooth scrolls the window to the provided element.
+	//
 	var smoothScroll = function (element, options) {
-		$timeout(function(){
+		options = options || {};
+
+		// Options
+		var duration = options.duration || 800,
+			offset = options.offset || 0,
+			easing = options.easing || 'easeInOutQuart',
+			callbackBefore = options.callbackBefore || function() {},
+			callbackAfter = options.callbackAfter || function() {};
+			
+		var getScrollLocation = function() {
+			return window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop;
+		};
+
+		setTimeout( function() {
 			var startLocation = getScrollLocation(),
 				timeLapsed = 0,
 				percentage, position;
 
-
-			// Options
-			//
-			options = options || {};
-			var duration = options.duration || 800,
-				offset = options.offset || 0,
-				easing = options.easing || 'easeInOutQuart',
-				callbackBefore = options.callbackBefore || function() {},
-				callbackAfter = options.callbackAfter || function() {};
-			
-
 			// Calculate the easing pattern
-			//
 			var easingPattern = function (type, time) {
 				if ( type == 'easeInQuad' ) return time * time; // accelerating from zero velocity
 				if ( type == 'easeOutQuad' ) return time * (2 - time); // decelerating to zero velocity
@@ -165,7 +69,6 @@ angular.module('smoothScroll', [])
 
 
 			// Calculate how far to scroll
-			//
 			var getEndLocation = function (element) {
 				var location = 0;
 				if (element.offsetParent) {
@@ -177,12 +80,12 @@ angular.module('smoothScroll', [])
 				location = Math.max(location - offset, 0);
 				return location;
 			};
+
 			var endLocation = getEndLocation(element);
 			var distance = endLocation - startLocation;
 
 
 			// Stop the scrolling animation when the anchor is reached (or at the top/bottom of the page)
-			//
 			var stopAnimation = function () {
 				var currentLocation = getScrollLocation();
 				if ( position == endLocation || currentLocation == endLocation || ( (window.innerHeight + currentLocation) >= document.body.scrollHeight ) ) {
@@ -193,7 +96,6 @@ angular.module('smoothScroll', [])
 
 
 			// Scroll the page by an increment, and check if it's time to stop
-			//
 			var animateScroll = function () {
 				timeLapsed += 16;
 				percentage = ( timeLapsed / duration );
@@ -205,11 +107,112 @@ angular.module('smoothScroll', [])
 
 
 			// Init
-			//
 			callbackBefore(element);
 			var runAnimation = setInterval(animateScroll, 16);
-		});
+		}, 0);
 	};
 
-	return smoothScroll;
-}]);
+
+	// Expose the library in a factory
+	//
+	module.factory('smoothScroll', function() {
+		return smoothScroll;
+	});
+	
+
+	// Scrolls the window to this element, optionally validating an expression
+	//
+	module.directive('smoothScroll', ['smoothScroll', function(smoothScroll) {
+		return {
+			restrict: 'A',
+			scope: {
+				callbackBefore: '&',
+				callbackAfter: '&',
+			},
+			link: function($scope, $elem, $attrs) {
+				if ( typeof $attrs.scrollIf === 'undefined' || $attrs.scrollIf === 'true' ) {
+					setTimeout( function() {
+
+						var callbackBefore = function(element) {
+							if ( $attrs.callbackBefore ) {
+								var exprHandler = $scope.callbackBefore({ element: element });
+								if (typeof exprHandler === 'function') {
+									exprHandler(element);
+								}
+							}
+						};
+
+						var callbackAfter = function(element) {
+							if ( $attrs.callbackAfter ) {
+								var exprHandler = $scope.callbackAfter({ element: element });
+								if (typeof exprHandler === 'function') {
+									exprHandler(element);
+								}
+							}
+						};
+
+						smoothScroll($elem[0], {
+							duration: $attrs.duration,
+							offset: $attrs.offset,
+							easing: $attrs.easing,
+							callbackBefore: callbackBefore,
+							callbackAfter: callbackAfter
+						});
+					}, 0);
+				}
+			}
+		};
+	}]);
+
+
+	// Scrolls to a specified element ID when this element is clicked
+	//
+	module.directive('scrollTo', ['smoothScroll', function(smoothScroll) {
+		return {
+			restrict: 'A',
+			scope: {
+				callbackBefore: '&',
+				callbackAfter: '&',
+			},
+			link: function($scope, $elem, $attrs) {
+				var targetElement;
+				
+				$elem.on('click', function(e) {
+					e.preventDefault();
+
+					targetElement = document.getElementById($attrs.scrollTo);
+					if ( !targetElement ) return; 
+					
+					var callbackBefore = function(element) {
+						if ( $attrs.callbackBefore ) {
+							var exprHandler = $scope.callbackBefore({element: element});
+							if (typeof exprHandler === 'function') {
+								exprHandler(element);
+							}
+						}
+					};
+
+					var callbackAfter = function(element) {
+						if ( $attrs.callbackAfter ) {
+							var exprHandler = $scope.callbackAfter({element: element});
+							if (typeof exprHandler === 'function') {
+								exprHandler(element);
+							}
+						}
+					};
+
+					smoothScroll(targetElement, {
+						duration: $attrs.duration,
+						offset: $attrs.offset,
+						easing: $attrs.easing,
+						callbackBefore: callbackBefore,
+						callbackAfter: callbackAfter
+					});
+
+					return false;
+				});
+			}
+		};
+	}]);
+
+}());
