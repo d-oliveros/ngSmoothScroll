@@ -1,7 +1,7 @@
 {
-  "name": "angular-smooth-scroll",
+  "name": "ngSmoothScroll",
   "version": "1.7.2",
-  "homepage": "https://github.com/d-oliveros/angular-smooth-scroll",
+  "homepage": "https://github.com/d-oliveros/ngSmoothScroll",
   "authors": [
     "David Oliveros <dato.oliveros@gmail.com>"
   ],
@@ -12,6 +12,10 @@
   },
   "keywords": [
     "angularjs",
+    "smooth scroll",
+    "scrolling",
+    "scroll effects",
+    "scroll animations",
     "smooth",
     "scroll"
   ],
