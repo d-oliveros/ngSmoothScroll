@@ -14,7 +14,7 @@ No jQuery required.
 
 ### Installation
 
-Include the .js file in your page then enable usage of the directive by including the "smoothScroll" module
+Include the .js file in your page then enable usage of the directive by including the `smoothScroll` module
 as a dependency
 
 
