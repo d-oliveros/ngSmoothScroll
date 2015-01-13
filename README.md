@@ -1,24 +1,24 @@
 Angular smooth scroll
-==============
+========================
 
 A pure-javascript library and set of directives to scroll smoothly to an element with easing. Easing support contributed by Willem Liu with code from Gaëtan Renaudeau.
 
 No jQuery required.
 
-# Features
+### Features
 
   * Exposes a service that scrolls the window to an element's location
   * Provides two directives that enable smooth scrolling to elements.
   * Clean: No classes are added, no jQuery is required, no CSS files or configuration is needed.
 
 
-# Installation
+### Installation
 
 Include the .js file in your page then enable usage of the directive by including the "smoothScroll" module
 as a dependency
 
 
-# Bower
+## Bower
 
 Install with bower with:
 
@@ -26,7 +26,7 @@ Install with bower with:
 bower install ngSmoothScroll
 ```
 
-# Usage - As a directive
+### Usage - As a directive
 
 This module provides two directives:
 
@@ -70,7 +70,7 @@ Example:
 ```
 
 
-# Usage - As a service
+### Usage - As a service
 
 Inject the 'smoothScroll' service in your directive / factory / controller / whatever, and call like this:
 
@@ -109,7 +109,7 @@ link: function($scope, $elem, $attrs){
 
 ```
 
-### Options
+## Options
 
 #### duration
 Type: `Integer`
@@ -159,24 +159,8 @@ The available easing functions are:
  * 'easeOutQuint'
  * 'easeInOutQuint'
 
-#### Credits
-
-Callback hooks contributed by Ben Armston.
-https://github.com/benarmston
-
-Easing support contributed by Willem Liu.
-https://github.com/willemliu
-
-Easing functions forked from Gaëtan Renaudeau.
-https://gist.github.com/gre/1650294
-
-Infinite loop bugs in iOS and Chrome (when zoomed) by Alex Guzman.
-https://github.com/alexguzman
-
-Influenced by Chris Ferdinandi
-https://github.com/cferdinandi
+### License
 
 Free to use under the MIT License.
-
 
 Cheers.
