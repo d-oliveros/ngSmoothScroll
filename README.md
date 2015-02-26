@@ -113,15 +113,19 @@ link: function($scope, $elem, $attrs){
 
 #### duration
 Type: `Integer`
-Default: `0`
+Default: `800`
 
 The duration of the smooth scroll, in miliseconds.
 
 #### offset
-Type: `Integer`
-Default: `800`
+Type: `Integer` or `Function` or `Element`
+Default: `0`
 
 The offset from the top of the page in which the scroll should stop.
+
+If the value specified is a `Function`, it is called as `offset = offset(element, options);` where the result may an `Integer` or `Element`
+
+If the value specified is an `Element` (native or jqLite), its `offsetHeight` will be used
 
 #### easing
 type: `string`
