@@ -62,7 +62,7 @@ Example:
 ```html
 
 // Basic
-<a href="#" scroll-to="my-element-3">Click me!</a>
+<a href="#" scroll-to="my-element-3" stop-for-interruptions>Click me!</a>
 
 
 // With options
@@ -88,6 +88,7 @@ var options = {
 	duration: 700,
 	easing: 'easeInQuad',
 	offset: 120,
+	stopForInterruptions: true,
 	callbackBefore: function(element) {
 		console.log('about to scroll to element', element);
 	},
@@ -132,6 +133,13 @@ type: `string`
 default: `easeInOutQuart`
 
 the easing function to be used for this scroll.
+
+#### stopForInterruptions
+type: `boolean`
+default: `false`
+
+If the value is true then when the user scrolls (scrollwheel evt) then the
+automatic scrolling will be stopped.
 
 #### callbackBefore
 type: `function`
