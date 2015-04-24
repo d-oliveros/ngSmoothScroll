@@ -147,6 +147,13 @@ default: `function(element) {}`
 a callback function to run after the scroll has completed. It is passed the
 element that was scrolled to.
 
+#### stopOnUserScroll
+type: `boolean`
+default: `false`
+
+If set to `true`, scrolling will stop if user scrolls (with wheel/trackpad) during animation. This prevents document "jumping" while both animation and wheel happen at the same time.
+
+
 ### Easing functions
 
 The available easing functions are:
