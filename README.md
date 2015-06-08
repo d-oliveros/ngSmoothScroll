@@ -93,7 +93,8 @@ var options = {
 	},
 	callbackAfter: function(element) {
 		console.log('scrolled to element', element);
-	}
+	},
+  container: document.getElementById('my-scroll-container')
 }
 
 smoothScroll(element, options);
@@ -152,6 +153,12 @@ type: `boolean`
 default: `false`
 
 If set to `true`, scrolling will stop if user scrolls (with wheel/trackpad) during animation. This prevents document "jumping" while both animation and wheel happen at the same time.
+
+#### container
+type: `HTMLElement`
+default: `window`
+
+Define an element that should be scrolled instead of the default (which is the window element).
 
 
 ### Easing functions
