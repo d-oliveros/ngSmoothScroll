@@ -10,7 +10,7 @@ No jQuery required.
   * Exposes a service that scrolls the window to an element's location
   * Provides two directives that enable smooth scrolling to elements.
   * Clean: No classes are added, no jQuery is required, no CSS files or configuration is needed.
-
+  * Scrolling within a custom container added in 1.7.2
 
 # Installation
 
