@@ -171,13 +171,13 @@ link: function($scope, $elem, $attrs){
 
 #### duration
 Type: `Integer`
-Default: `0`
+Default: `800`
 
 The duration of the smooth scroll, in miliseconds.
 
 #### offset
 Type: `Integer`
-Default: `800`
+Default: `0`
 
 The offset from the top of the page in which the scroll should stop.
 
