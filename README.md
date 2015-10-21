@@ -10,7 +10,7 @@ No jQuery required.
   * Exposes a service that scrolls the window to an element's location
   * Provides two directives that enable smooth scrolling to elements.
   * Clean: No classes are added, no jQuery is required, no CSS files or configuration is needed.
-  * Scrolling within a custom container added in 1.7.3
+  * Scrolling within a custom container added in 2.0.0
 
 # Installation
 
@@ -41,35 +41,35 @@ Example:
 <div smooth-scroll></div>
 
 // With options
-<div smooth-scroll 
-	duration="800" 
-	easing="easeInQuint" 
+<div smooth-scroll
+	duration="800"
+	easing="easeInQuint"
 	offset="120"
-	callback-before="aFunction(element)" 
+	callback-before="aFunction(element)"
 	callback-after="anotherFunction">
 	{{...}}
 </div>
-	
+
 // Inside a custom container
-<div smooth-scroll 
-	duration="800" 
-	easing="easeInQuint" 
+<div smooth-scroll
+	duration="800"
+	easing="easeInQuint"
 	offset="120"
-	callback-before="aFunction(element)" 
+	callback-before="aFunction(element)"
 	callback-after="anotherFunction"
 	container-id="container-id">
 	{{...}}
 </div>
 
 // With condition
-<div smooth-scroll 
+<div smooth-scroll
 	scroll-if="{{ myExpression }}">
 	{{...}}
 </div>
 
 // Inside ng-repeat
-<div smooth-scroll 
-	scroll-if="{{ $last }}" 
+<div smooth-scroll
+	scroll-if="{{ $last }}"
 	duration="2500">
 	{{...}}
 </div>
@@ -83,13 +83,13 @@ Example:
 ```html
 
 // Basic
-<a href="#" 
+<a href="#"
 	scroll-to="my-element-3">
 	Click me!
 </a>
 
 // Custom containers
-<a href="#" 
+<a href="#"
 	scroll-to="my-element-3"
 	container-id="custom-container-id">
 	Click me!
@@ -102,10 +102,10 @@ Example:
 </div>
 
 // With options
-<button 
-	scroll-to="elem-id5" 
-	duration="1800" 
-	callback-before="aFunction(element)" 
+<button
+	scroll-to="elem-id5"
+	duration="1800"
+	callback-before="aFunction(element)"
 	callback-after="anotherFunction">
 	Scroll to next page.
 </button>
