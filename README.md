@@ -105,6 +105,7 @@ Example:
 <button
 	scroll-to="elem-id5"
 	duration="1800"
+	scroll-if="isTruthy()"
 	callback-before="aFunction(element)"
 	callback-after="anotherFunction">
 	Scroll to next page.
@@ -185,20 +186,20 @@ The offset from the top of the page in which the scroll should stop.
 type: `string`
 default: `easeInOutQuart`
 
-the easing function to be used for this scroll.
+The easing function to be used for this scroll.
 
 #### callbackBefore
 type: `function`
 default: `function(element) {}`
 
-a callback function to run before the scroll has started. It is passed the
+A callback function to run before the scroll has started. It is passed the
 element that will be scrolled to.
 
 #### callbackAfter
 type: `function`
 default: `function(element) {}`
 
-a callback function to run after the scroll has completed. It is passed the
+A callback function to run after the scroll has completed. It is passed the
 element that was scrolled to.
 
 #### containerId
@@ -206,6 +207,12 @@ type: `string`
 default: null
 
 ID of the scrollable container which the element is a child of.
+
+#### scrollIf
+type: `function`, `boolean`, `string`, `number`
+default: true
+
+Will allow scrolling if the value passed to scrollIf resolves to a truthy value.
 
 ### Easing functions
 
