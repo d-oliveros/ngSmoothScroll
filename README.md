@@ -42,35 +42,35 @@ Example:
 
 // With options
 <div smooth-scroll
-	duration="800"
-	easing="easeInQuint"
-	offset="120"
-	callback-before="aFunction(element)"
-	callback-after="anotherFunction">
+	scroll-duration="800"
+	scroll-easing="easeInQuint"
+	scroll-offset="120"
+	scroll-callback-before="aFunction(element)"
+	scroll-callback-after="anotherFunction()">
 	{{...}}
 </div>
 
 // Inside a custom container
 <div smooth-scroll
-	duration="800"
-	easing="easeInQuint"
-	offset="120"
-	callback-before="aFunction(element)"
-	callback-after="anotherFunction"
-	container-id="container-id">
+	scroll-duration="800"
+	scroll-easing="easeInQuint"
+	scroll-offset="120"
+	scroll-callback-before="aFunction(element)"
+	scroll-callback-after="anotherFunction()"
+	scroll-container-id="container-id">
 	{{...}}
 </div>
 
 // With condition
 <div smooth-scroll
-	scroll-if="{{ myExpression }}">
+	scroll-if="someCtrlValue === 'test'">
 	{{...}}
 </div>
 
 // Inside ng-repeat
 <div smooth-scroll
-	scroll-if="{{ $last }}"
-	duration="2500">
+	scroll-if="$last"
+	scroll-duration="2500">
 	{{...}}
 </div>
 ```
@@ -91,22 +91,22 @@ Example:
 // Custom containers
 <a href="#"
 	scroll-to="my-element-3"
-	container-id="custom-container-id">
+	scroll-container-id="custom-container-id">
 	Click me!
 </a>
 
 // onClick for non-anchor tags
 <div scroll-to="my-element-3"
-	container-id="custom-container-id">
+	scroll-container-id="custom-container-id">
 	Click me!
 </div>
 
 // With options
 <button
 	scroll-to="elem-id5"
-	duration="1800"
-	callback-before="aFunction(element)"
-	callback-after="anotherFunction">
+	scroll-duration="1800"
+	scroll-callback-before="aFunction(element)"
+	scroll-callback-after="anotherFunction">
 	Scroll to next page.
 </button>
 ```
@@ -242,6 +242,9 @@ https://github.com/zephinzer
 
 Influenced by Chris Ferdinandi
 https://github.com/cferdinandi
+
+Directives by Alex Danilenko
+https://github.com/alxdnlnko
 
 Free to use under the MIT License.
 
