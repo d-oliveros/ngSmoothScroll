@@ -1,5 +1,5 @@
 {
-  "name": "ng-smooth-scroll2",
+  "name": "ng-smooth-scroll",
   "version": "2.0.0",
   "description": "A pure-javascript library and set of directives to scroll smoothly to an element with easing.",
   "main": "lib/angular-smooth-scroll.js",
