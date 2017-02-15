@@ -11,10 +11,10 @@ declare namespace ngSmoothScroll {
 	type easingType = 'easeInQuad'|'easeOutQuad'|'easeInOutQuad'|'easeInCubic'|'easeOutCubic'|'easeInOutCubic'|'easeInQuart'|'easeOutQuart'|'easeInOutQuart'|'easeInQuint'|'easeOutQuint'|'easeInOutQuint';
 
 	interface IOptions {
-		duration?: number,
+		duration?: number;
 	    offset?: number;
 	   	easing?: easingType;
-	    callbackBefore?:(element: HTMLElement) => void;
+	    callbackBefore?: (element: HTMLElement) => void;
 	    callbackAfter?: (element: HTMLElement) => void;
 	    containerId?: string;
 	}
