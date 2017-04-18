@@ -30,7 +30,7 @@ bower install ngSmoothScroll
 
 This module provides two directives:
 
-####smoothScroll:
+#### smoothScroll:
 
 Attribute. Scrolls the window to this element, optionally validating the expression inside scroll-if.
 
@@ -75,7 +75,7 @@ Example:
 </div>
 ```
 
-####scrollTo:
+#### scrollTo:
 
 Attribute. Scrolls the window to the specified element ID when clicking this element.
 
